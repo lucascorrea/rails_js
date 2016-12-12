@@ -1,0 +1,1266 @@
+  [1m[35m (799.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (85.6ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('7694428824025496280', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (25.6ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateCustomers (20161212221311)
+  [1m[35m (95.9ms)[0m  [1m[35mCREATE TABLE `customers` (`id` int AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `city` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20161212221311')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (54.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2016-12-12 22:14:26', '2016-12-12 22:14:26')[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('7694428824025496280')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `customers`[0m
+  [1m[35m (2.1ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'customers'[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'rails_js_development'
+  AND fk.table_name = 'customers'
+[0m
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:14:38 -0200
+  [1m[36mActiveRecord::SchemaMigration Load (41.6ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (21.2ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (75.5ms)
+Completed 200 OK in 2491ms (Views: 2411.3ms | ActiveRecord: 22.7ms)
+
+
+Started GET "/customers/new" for 127.0.0.1 at 2016-12-12 20:14:43 -0200
+Processing by CustomersController#new as HTML
+  Rendering customers/new.html.erb within layouts/application
+  Rendered customers/_form.html.erb (21.7ms)
+  Rendered customers/new.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 73ms (Views: 60.8ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/customers" for 127.0.0.1 at 2016-12-12 20:14:51 -0200
+Processing by CustomersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"62Ta1Fhq8WwLpbpmeMlEg/b1nFJdjXrCcBOdFSHt3Wv56nwt7Ei16qmgoVuF8TKpJ9lUncvUQOjcSrZU5TM7Sg==", "customer"=>{"name"=>"Lucas", "city"=>"Sao Paulo"}, "commit"=>"Create Customer"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (18.3ms)[0m  [1m[32mINSERT INTO `customers` (`name`, `city`, `created_at`, `updated_at`) VALUES ('Lucas', 'Sao Paulo', '2016-12-12 22:14:51', '2016-12-12 22:14:51')[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/customers/1
+Completed 302 Found in 31ms (ActiveRecord: 24.3ms)
+
+
+Started GET "/customers/1" for 127.0.0.1 at 2016-12-12 20:14:51 -0200
+Processing by CustomersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT  `customers`.* FROM `customers` WHERE `customers`.`id` = 1 LIMIT 1[0m
+  Rendering customers/show.html.erb within layouts/application
+  Rendered customers/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 56ms (Views: 46.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:14:52 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 37ms (Views: 34.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers/new" for 127.0.0.1 at 2016-12-12 20:14:55 -0200
+Processing by CustomersController#new as HTML
+  Rendering customers/new.html.erb within layouts/application
+  Rendered customers/_form.html.erb (4.0ms)
+  Rendered customers/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 46ms (Views: 42.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/customers" for 127.0.0.1 at 2016-12-12 20:15:03 -0200
+Processing by CustomersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AkTShkRXSNRJJQ5MJj5j1KZS+EuF89rsZVDSdRpqW/8QynR/8HUMUusgFXHbBhX+d34whBOq4MbJCfk03rS93g==", "customer"=>{"name"=>"Joao", "city"=>"Rio de Janeiro"}, "commit"=>"Create Customer"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (3.2ms)[0m  [1m[32mINSERT INTO `customers` (`name`, `city`, `created_at`, `updated_at`) VALUES ('Joao', 'Rio de Janeiro', '2016-12-12 22:15:03', '2016-12-12 22:15:03')[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/customers/2
+Completed 302 Found in 11ms (ActiveRecord: 4.5ms)
+
+
+Started GET "/customers/2" for 127.0.0.1 at 2016-12-12 20:15:03 -0200
+Processing by CustomersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  `customers`.* FROM `customers` WHERE `customers`.`id` = 2 LIMIT 1[0m
+  Rendering customers/show.html.erb within layouts/application
+  Rendered customers/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 48ms (Views: 45.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:15:04 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 37ms (Views: 32.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-12 20:19:27 -0200
+Processing by Rails::WelcomeController#index as HTML
+  Parameters: {"internal"=>true}
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb (3.9ms)
+Completed 200 OK in 14ms (Views: 8.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:19:34 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (2.1ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 470ms (Views: 463.8ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-12 20:20:08 -0200
+  [1m[36mActiveRecord::SchemaMigration Load (24.0ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Rails::WelcomeController#index as HTML
+  Parameters: {"internal"=>true}
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb (4.8ms)
+Completed 200 OK in 30ms (Views: 11.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:20:11 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (22.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (39.5ms)
+Completed 200 OK in 363ms (Views: 330.7ms | ActiveRecord: 26.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:20:33 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 31ms (Views: 28.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:20:59 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (18.8ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 49ms (Views: 26.1ms | ActiveRecord: 18.8ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:21:07 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (43.1ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (45.2ms)
+Completed 200 OK in 70ms (Views: 25.2ms | ActiveRecord: 43.1ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:21:47 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 63ms (Views: 59.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-12-12 20:21:57 -0200
+Processing by Rails::WelcomeController#index as HTML
+  Parameters: {"internal"=>true}
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb (3.5ms)
+Completed 200 OK in 11ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:21:59 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (43.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (46.2ms)
+Completed 200 OK in 84ms (Views: 37.5ms | ActiveRecord: 43.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:22:07 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 32ms (Views: 29.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:23:19 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (54.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (59.6ms)
+Completed 200 OK in 714ms (Views: 656.9ms | ActiveRecord: 54.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:23:21 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 32ms (Views: 29.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:23:52 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 300ms (Views: 297.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:26:02 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (1.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 497ms (Views: 484.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:26:44 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 80ms (Views: 76.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:27:16 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 447ms (Views: 444.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:27:59 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.9ms)
+Completed 500 Internal Server Error in 458ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (SyntaxError: [stdin]:6:17: unexpected identifier):
+     5:     <%= csrf_meta_tags %>
+     6: 
+     7:     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     8:     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+     9:   </head>
+    10: 
+    11:   <body>
+  
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__2777824081781687158_70157631685720'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (7.1ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (103.8ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:28:10 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 406ms (Views: 400.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:28:48 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 457ms (Views: 453.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:30:40 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 488ms (Views: 485.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:31:04 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 554ms (Views: 551.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:31:42 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (1.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 315ms (Views: 311.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:31:54 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 363ms (Views: 360.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:32:19 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 49ms (Views: 44.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:32:21 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 41ms (Views: 37.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:32:57 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 571ms (Views: 565.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:33:12 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 37ms (Views: 34.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:34:28 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 38ms (Views: 35.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:34:57 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 505ms (Views: 502.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:35:43 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 447ms (Views: 443.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:36:15 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.8ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 580ms (Views: 568.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:36:45 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 468ms (Views: 464.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:37:00 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 58ms (Views: 54.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:38:32 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.8ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 543ms (Views: 540.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:38:47 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 37ms (Views: 34.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:39:02 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 570ms (Views: 566.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:39:56 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 490ms (Views: 486.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:41:28 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 571ms (Views: 564.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:41:30 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+DEPRECATION WARNING: `render :text` is deprecated because it does not actually render a `text/plain` response. Switch to `render plain: 'plain text'` to render as `text/plain`, `render html: '<strong>HTML</strong>'` to render as `text/html`, or `render body: 'raw'` to match the deprecated behavior and render with the default Content-Type, which is `text/plain`. (called from recharges at /Users/lucas/Documents/ProjectsRails/rails_js/app/controllers/customers_controller.rb:30)
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 49ms (Views: 47.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:41:52 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 45ms (Views: 39.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:41:54 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template customers/recharges, application/recharges with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/lucas/Documents/ProjectsRails/rails_js/app/views"
+):
+  
+app/controllers/customers_controller.rb:30:in `recharges'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb (0.6ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:42:20 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 31ms (Views: 28.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:42:21 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template customers/recharges, application/recharges with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/lucas/Documents/ProjectsRails/rails_js/app/views"
+):
+  
+app/controllers/customers_controller.rb:30:in `recharges'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb (0.4ms)
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:42:23 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template customers/recharges, application/recharges with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/lucas/Documents/ProjectsRails/rails_js/app/views"
+):
+  
+app/controllers/customers_controller.rb:30:in `recharges'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb (0.4ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:42:30 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 31ms (Views: 28.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:43:20 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template customers/recharges, application/recharges with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/lucas/Documents/ProjectsRails/rails_js/app/views"
+):
+  
+app/controllers/customers_controller.rb:30:in `recharges'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb (0.4ms)
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 20:43:23 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template customers/recharges, application/recharges with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :svg, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip, :gzip], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/lucas/Documents/ProjectsRails/rails_js/app/views"
+):
+  
+app/controllers/customers_controller.rb:30:in `recharges'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/missing_template.text.erb (0.4ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:49:03 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (1.2ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (5.3ms)
+  Rendered customers/index.html.erb within layouts/application (20.7ms)
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 1.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `count' for nil:NilClass):
+    1: <%= @recharges.count %>
+    2: <% recharges.each do |recharge| %>
+    3:     <div class="item_box">
+    4:       PASSOU
+  
+app/views/customers/_recharges.html.erb:1:in `_app_views_customers__recharges_html_erb__317037836373911697_70157609770440'
+app/views/customers/index.html.erb:28:in `_app_views_customers_index_html_erb___1964473278435438700_70157653882880'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.3ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (93.6ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:49:22 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (3.7ms)
+  Rendered customers/index.html.erb within layouts/application (8.4ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    1: <% recharges.each do |recharge| %>
+    2:     <div class="item_box">
+    3:       PASSOU
+    4:     </div>
+  
+app/views/customers/_recharges.html.erb:1:in `_app_views_customers__recharges_html_erb__317037836373911697_70157653738760'
+app/views/customers/index.html.erb:28:in `_app_views_customers_index_html_erb___1964473278435438700_70157639613160'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.3ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (118.4ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:51:11 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (3.9ms)
+  Rendered customers/index.html.erb within layouts/application (9.1ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    1: <% recharges.each do |recharge| %>
+    2:     <div class="item_box">
+    3:       PASSOU
+    4:     </div>
+  
+app/views/customers/_recharges.html.erb:1:in `_app_views_customers__recharges_html_erb__317037836373911697_70157605056140'
+app/views/customers/index.html.erb:28:in `_app_views_customers_index_html_erb___1964473278435438700_70157597370340'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.2ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (98.5ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:51:50 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.5ms)
+  Rendered customers/index.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 55ms (Views: 47.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:51:53 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 81ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:53:55 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.4ms)
+  Rendered customers/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 33ms (Views: 29.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:53:58 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 70ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:54:05 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 35ms (Views: 33.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:56:30 -0200
+  [1m[36mActiveRecord::SchemaMigration Load (24.5ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (17.9ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (47.3ms)
+Completed 200 OK in 525ms (Views: 477.1ms | ActiveRecord: 27.7ms)
+
+
+Started GET "/__meta_request/0689e6c5-5174-4a56-ba17-85c699d294e3.json" for 127.0.0.1 at 2016-12-12 20:56:31 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:57:50 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 70ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/ae63e9ae-0cdb-422d-85c1-309b02b11d13.json" for 127.0.0.1 at 2016-12-12 20:57:51 -0200
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 20:57:51 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/ff660a7a-953c-42fc-88be-bfac8bf55637.json" for 127.0.0.1 at 2016-12-12 20:57:52 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:57:56 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 71ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/013e101c-9bd5-4982-9a30-1cf676a85dd1.json" for 127.0.0.1 at 2016-12-12 20:57:56 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 20:58:48 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (18.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.5ms)
+  Rendered customers/index.html.erb within layouts/application (61.2ms)
+Completed 200 OK in 115ms (Views: 59.6ms | ActiveRecord: 46.4ms)
+
+
+Started GET "/__meta_request/71d98087-ebc1-437d-813d-22aa81606596.json" for 127.0.0.1 at 2016-12-12 20:58:49 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 20:58:54 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 71ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/3560b599-a666-433c-a555-0cdda7de928d.json" for 127.0.0.1 at 2016-12-12 20:58:54 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:02:31 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (28.9ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (46.7ms)
+Completed 200 OK in 753ms (Views: 718.1ms | ActiveRecord: 28.9ms)
+
+
+Started GET "/__meta_request/2248e4b2-4bc8-4251-bf19-03888e1d6adf.json" for 127.0.0.1 at 2016-12-12 21:02:32 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:02:38 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 34ms (Views: 30.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/__meta_request/d10b2d11-329a-410f-b521-f1d2aa65ad6b.json" for 127.0.0.1 at 2016-12-12 21:02:38 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:02:47 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (1.0ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.9ms)
+  Rendered customers/index.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 56ms (Views: 51.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/__meta_request/86127c62-71b3-4ed9-a7c8-0d3a4b838780.json" for 127.0.0.1 at 2016-12-12 21:02:48 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:02:49 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 71ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/70791670-05b0-4c62-b6c9-d45ca705cd32.json" for 127.0.0.1 at 2016-12-12 21:02:49 -0200
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 21:02:50 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 78ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/9bb9600c-f8b9-4364-979d-16101f763926.json" for 127.0.0.1 at 2016-12-12 21:02:50 -0200
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 21:02:51 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 85ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/1a4deb50-231f-4792-9b30-bf9f607fa4b9.json" for 127.0.0.1 at 2016-12-12 21:02:51 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:03:02 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.7ms)
+  Rendered customers/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 517ms (Views: 513.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/__meta_request/c78703d9-96f1-4f41-93ae-fc6f5778236a.json" for 127.0.0.1 at 2016-12-12 21:03:03 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:03:05 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 87ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/d8aaf88a-8d51-4290-a2a8-e630d0f17c1b.json" for 127.0.0.1 at 2016-12-12 21:03:05 -0200
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 21:03:06 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 80ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/7d824134-0dc7-4576-bf61-041b6edce3fe.json" for 127.0.0.1 at 2016-12-12 21:03:06 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:03:07 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 70ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/948538c0-73e2-4a07-a40d-ab9d539381e8.json" for 127.0.0.1 at 2016-12-12 21:03:07 -0200
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 21:03:08 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 84ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/5faeec77-d22e-44b2-9e94-efbf9c0fd443.json" for 127.0.0.1 at 2016-12-12 21:03:08 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:03:10 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 72ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/c4448e45-7b5b-4500-88fa-6d738e1269cd.json" for 127.0.0.1 at 2016-12-12 21:03:10 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:04:56 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (29.9ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.5ms)
+  Rendered customers/index.html.erb within layouts/application (36.4ms)
+Completed 200 OK in 75ms (Views: 42.2ms | ActiveRecord: 29.9ms)
+
+
+Started GET "/__meta_request/02add9dc-3437-470b-9083-885bc1359b91.json" for 127.0.0.1 at 2016-12-12 21:04:56 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:05:30 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.7ms)
+  Rendered customers/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 44ms (Views: 39.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/622c7f17-a5c7-450c-8efb-2573857f205c.json" for 127.0.0.1 at 2016-12-12 21:05:30 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:05:46 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 71ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/8df2233d-bb4e-4b47-84b6-962abbbcd38a.json" for 127.0.0.1 at 2016-12-12 21:05:46 -0200
+Started GET "/customers/new" for 127.0.0.1 at 2016-12-12 21:06:10 -0200
+Processing by CustomersController#new as JS
+  Rendering customers/new.html.erb within layouts/application
+  Rendered customers/_form.html.erb (27.2ms)
+  Rendered customers/new.html.erb within layouts/application (46.3ms)
+Completed 200 OK in 108ms (Views: 88.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/3e2f8386-5125-43be-ade9-91cd7ac223a7.json" for 127.0.0.1 at 2016-12-12 21:06:11 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:07:13 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 42ms (Views: 38.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/__meta_request/b01f3e68-b67d-4bd1-b682-60a8b230a32f.json" for 127.0.0.1 at 2016-12-12 21:07:13 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:07:15 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 76ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers/2" for 127.0.0.1 at 2016-12-12 21:07:15 -0200
+Processing by CustomersController#show as JS
+  Parameters: {"id"=>"2"}
+Started GET "/__meta_request/90c3fec1-c2da-4fb0-82c4-830dbb9da3fe.json" for 127.0.0.1 at 2016-12-12 21:07:15 -0200
+  [1m[36mCustomer Load (41.5ms)[0m  [1m[34mSELECT  `customers`.* FROM `customers` WHERE `customers`.`id` = 2 LIMIT 1[0m
+  Rendering customers/show.html.erb within layouts/application
+  Rendered customers/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 113ms (Views: 41.7ms | ActiveRecord: 41.5ms)
+
+
+Started GET "/__meta_request/7aaff7bb-33e0-483d-8821-e3e2a15f9924.json" for 127.0.0.1 at 2016-12-12 21:07:16 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:07:34 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 50ms (Views: 46.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/d958364c-66ff-4b14-9f5b-545480866a45.json" for 127.0.0.1 at 2016-12-12 21:07:34 -0200
+Started GET "/customers/1/recharges" for 127.0.0.1 at 2016-12-12 21:07:36 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"1"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 84ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers/1" for 127.0.0.1 at 2016-12-12 21:07:37 -0200
+Processing by CustomersController#show as JS
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomer Load (1.6ms)[0m  [1m[34mSELECT  `customers`.* FROM `customers` WHERE `customers`.`id` = 1 LIMIT 1[0m
+Started GET "/__meta_request/45093ee1-c8dd-4cf8-9832-2e7c74c04e33.json" for 127.0.0.1 at 2016-12-12 21:07:37 -0200
+  Rendering customers/show.html.erb within layouts/application
+  Rendered customers/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 69ms (Views: 41.7ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/__meta_request/c58206b4-6d1c-4e7d-8e48-973820628bd2.json" for 127.0.0.1 at 2016-12-12 21:07:37 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:07:59 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.5ms)
+  Rendered customers/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 38ms (Views: 34.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/__meta_request/deafe116-eaf2-4d9a-828c-15c3fe34a846.json" for 127.0.0.1 at 2016-12-12 21:07:59 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:08:02 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 72ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers/2" for 127.0.0.1 at 2016-12-12 21:08:02 -0200
+Processing by CustomersController#show as JS
+  Parameters: {"id"=>"2"}
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT  `customers`.* FROM `customers` WHERE `customers`.`id` = 2 LIMIT 1[0m
+Started GET "/__meta_request/2ba5f49f-c710-43bd-84b1-a45711ae5cc3.json" for 127.0.0.1 at 2016-12-12 21:08:02 -0200
+  Rendering customers/show.html.erb within layouts/application
+  Rendered customers/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 67ms (Views: 47.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/4971b7c1-80d1-4ea9-bd4b-2e29f5041c89.json" for 127.0.0.1 at 2016-12-12 21:08:02 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:08:22 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (7.2ms)
+Completed 500  in 17ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"recharges", :controller=>"customers"} missing required keys: [:id]):
+    16:       <tr class="clickable-row" data-customer=<%= customer.id %>>
+    17:         <td><%= customer.name %></td>
+    18:         <td><%= customer.city %></td>
+    19:         <td><%= link_to 'recharges', recharges_customer_path, remote: true %></td>
+    20:         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+    21:         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    22:       </tr>
+  
+app/views/customers/index.html.erb:19:in `block in _app_views_customers_index_html_erb__2104876113865859350_70134452531060'
+app/views/customers/index.html.erb:15:in `_app_views_customers_index_html_erb__2104876113865859350_70134452531060'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.0ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (104.0ms)
+Started GET "/__meta_request/cca7e3e6-152b-4975-98fd-0c520a0f9a4e.json" for 127.0.0.1 at 2016-12-12 21:08:23 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:08:31 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (6.6ms)
+Completed 500  in 18ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (No route matches {:action=>"recharges", :controller=>"customers"} missing required keys: [:id]):
+    16:       <tr class="clickable-row" data-customer=<%= customer.id %>>
+    17:         <td><%= customer.name %></td>
+    18:         <td><%= customer.city %></td>
+    19:         <td><%= link_to 'recharges', recharges_customer_url, remote: true %></td>
+    20:         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+    21:         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    22:       </tr>
+  
+app/views/customers/index.html.erb:19:in `block in _app_views_customers_index_html_erb__2104876113865859350_70134422836700'
+app/views/customers/index.html.erb:15:in `_app_views_customers_index_html_erb__2104876113865859350_70134422836700'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.4ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (95.3ms)
+Started GET "/__meta_request/dee79d30-46a3-484a-82e5-2980640aeea9.json" for 127.0.0.1 at 2016-12-12 21:08:32 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:08:44 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (145.0ms)
+Completed 500  in 154ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `recharges' for #<#<Class:0x007f92e13dd6e8>:0x007f92e16e3478>
+Did you mean?  @recharges):
+    16:       <tr class="clickable-row" data-customer=<%= customer.id %>>
+    17:         <td><%= customer.name %></td>
+    18:         <td><%= customer.city %></td>
+    19:         <td><%= link_to 'recharges', recharges, remote: true %></td>
+    20:         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+    21:         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    22:       </tr>
+  
+app/views/customers/index.html.erb:19:in `block in _app_views_customers_index_html_erb__2104876113865859350_70134412035920'
+app/views/customers/index.html.erb:15:in `_app_views_customers_index_html_erb__2104876113865859350_70134412035920'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (9.1ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.5ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (97.1ms)
+Started GET "/__meta_request/8b281e7d-20d9-4482-8e69-132e788ee9ea.json" for 127.0.0.1 at 2016-12-12 21:08:45 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:09:12 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.5ms)
+  Rendered customers/index.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 43ms (Views: 39.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/0b1ce87e-e9a6-4ceb-a580-a0960fc09857.json" for 127.0.0.1 at 2016-12-12 21:09:12 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:09:15 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 78ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customer/recharges" for 127.0.0.1 at 2016-12-12 21:09:15 -0200
+  
+ActionController::RoutingError (No route matches [GET] "/customer/recharges"):
+  
+actionpack (5.0.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+rack-contrib (1.2.0) lib/rack/contrib/response_headers.rb:17:in `call'
+meta_request (0.4.0) lib/meta_request/middlewares/headers.rb:16:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `block in tagged'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `tagged'
+railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/__meta_request/0095036c-5279-4391-8c26-2120e3503468.json" for 127.0.0.1 at 2016-12-12 21:09:15 -0200
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.text.erb
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (1.0ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/routing_error.text.erb (37.0ms)
+Started GET "/__meta_request/6801c7f6-c0e9-4e3d-8d9b-0d78986384b4.json" for 127.0.0.1 at 2016-12-12 21:09:15 -0200
+  
+Errno::ENOENT (No such file or directory @ rb_sysopen - /Users/lucas/Documents/ProjectsRails/rails_js/tmp/data/meta_request/6801c7f6-c0e9-4e3d-8d9b-0d78986384b4.json):
+  
+meta_request (0.4.0) lib/meta_request/storage.rb:16:in `read'
+meta_request (0.4.0) lib/meta_request/storage.rb:16:in `read'
+meta_request (0.4.0) lib/meta_request/middlewares/meta_request_handler.rb:20:in `events_json'
+meta_request (0.4.0) lib/meta_request/middlewares/meta_request_handler.rb:11:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+rack (2.0.1) lib/rack/session/abstract/id.rb:222:in `context'
+rack (2.0.1) lib/rack/session/abstract/id.rb:216:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.0.1) lib/active_record/migration.rb:552:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+rack-contrib (1.2.0) lib/rack/contrib/response_headers.rb:17:in `call'
+meta_request (0.4.0) lib/meta_request/middlewares/headers.rb:16:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `block in tagged'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `tagged'
+railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.8ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendering /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/lucas/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (92.6ms)
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:09:48 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.4ms)
+  Rendered customers/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 40ms (Views: 36.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/__meta_request/9ff37bbe-325a-45e5-9608-b119cbee018e.json" for 127.0.0.1 at 2016-12-12 21:09:48 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:09:53 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 79ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:09:53 -0200
+Processing by CustomersController#recharges as JS
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 69ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/2b225f8e-921b-46a5-9cdb-3a6064f4c59c.json" for 127.0.0.1 at 2016-12-12 21:09:53 -0200
+Started GET "/__meta_request/44ffd881-214b-419a-ade0-278d5494144a.json" for 127.0.0.1 at 2016-12-12 21:09:53 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:10:14 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.4ms)
+  Rendered customers/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 38ms (Views: 34.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/__meta_request/b16f35f0-fb43-46ad-81dc-784d9e054e3c.json" for 127.0.0.1 at 2016-12-12 21:10:14 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:10:24 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 74ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:10:24 -0200
+Processing by CustomersController#recharges as JS
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 68ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/af71674b-ff4a-426d-93d4-89c852eb6e6a.json" for 127.0.0.1 at 2016-12-12 21:10:24 -0200
+Started GET "/__meta_request/b87a0e51-6a2a-4e97-af8f-73ba4e3837d4.json" for 127.0.0.1 at 2016-12-12 21:10:24 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:11:28 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.7ms)
+  Rendered customers/index.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 54ms (Views: 50.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/404ddfbd-b300-474a-8a43-794bf3c3b729.json" for 127.0.0.1 at 2016-12-12 21:11:28 -0200
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:11:30 -0200
+Processing by CustomersController#recharges as */*
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 83ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/customers/2/recharges" for 127.0.0.1 at 2016-12-12 21:11:30 -0200
+Processing by CustomersController#recharges as JS
+  Parameters: {"id"=>"2"}
+No template found for CustomersController#recharges, rendering head :no_content
+Completed 204 No Content in 74ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/__meta_request/e1e5d1c5-08a9-4c32-9ad2-e0562dfe23b0.json" for 127.0.0.1 at 2016-12-12 21:11:31 -0200
+Started GET "/__meta_request/fc0a84ea-1bcd-431c-950b-8d600f013dc9.json" for 127.0.0.1 at 2016-12-12 21:11:31 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:11:59 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.8ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 47ms (Views: 41.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/__meta_request/8fbccd8f-69fc-4c04-b8a4-7e25079b4092.json" for 127.0.0.1 at 2016-12-12 21:11:59 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:12:19 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.7ms)
+  Rendered customers/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 44ms (Views: 40.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/5f36cc80-fa03-49f9-92bc-78713b83e43d.json" for 127.0.0.1 at 2016-12-12 21:12:19 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:12:27 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.7ms)
+  Rendered customers/index.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 63ms (Views: 57.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/__meta_request/9829dd85-cbc8-47b0-a2f4-ea5659813a02.json" for 127.0.0.1 at 2016-12-12 21:12:27 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:12:40 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 37ms (Views: 33.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/__meta_request/395a8e40-fda1-4a61-835c-6e7dbb19548e.json" for 127.0.0.1 at 2016-12-12 21:12:40 -0200
+Started GET "/customers" for 127.0.0.1 at 2016-12-12 21:12:53 -0200
+Processing by CustomersController#index as HTML
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/_recharges.html.erb (0.6ms)
+  Rendered customers/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 37ms (Views: 33.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/__meta_request/f95d6728-043d-4508-b775-c13f7b4ed3b3.json" for 127.0.0.1 at 2016-12-12 21:12:53 -0200
